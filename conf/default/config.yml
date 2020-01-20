@@ -1,0 +1,83 @@
+log:
+  level: "debug"
+  encoding: "console" # `json` or `console`
+  encoderConfig:
+    messageKey: "message"
+    levelKey: "level"
+    nameKey: "greeterSrv"
+  outputPaths:
+    - stdout
+  ErrorOutputPaths:
+    - stderr
+
+server:
+  - ip: "0.0.0.0"
+    port: 0
+    protocol: "grpc"
+
+node:
+  nodeId: "1"
+  version: "1.0"
+
+service:
+  key: "/7YES_SERVICE/SERVICE/j7go"
+  ttl: 1000 # 单位s
+  heartbeat: 100 # 单位s heartbeat的设置要比ttl略小, 防止过期
+
+etcd:
+  endpoints:
+    - "127.0.0.1:2379"
+  autoSyncInterval: 10
+  dialTimeout: 10
+  dialKeepAliveTime: 10
+  dialKeepAliveTimeout: 10
+  username: ""
+  password: ""
+
+redis:
+  addr: "127.0.0.1:6379"
+  password: ""
+  db: 0
+  MaxIdle: 10
+  MaxActive: 10
+  IdleTimeout: 10
+  Wait: true
+  MaxConnLifetime: 600
+
+db:
+  name: "j7go"
+  maxConnNum: 10
+  maxIdleConns: 5
+  master:
+    addr: "127.0.0.1:3306"
+    user: "root"
+    password: "awerli123"
+    weight: 1
+  slave:
+    -
+      addr: "127.0.0.1:3306"
+      user: "root"
+      password: "awerli123"
+      weight: 1
+nsq:
+  config:
+    poolCap: 1 #producer connect pool max number, set to 0 that means Unlimited
+    lookupdPollInterval: 1000000000 #连接超时时间
+    Concurrency: 3 #consumer handler concurrency number
+  producer: "127.0.0.1:4161"
+  consumer:
+    -
+      "127.0.0.1:4161"
+    -
+      "127.0.0.1:4161"
+
+mq:
+  endpoint: "http://1235961432742464.mqrest.cn-hangzhou.aliyuncs.com"
+  accessKey: "LTAIszSGmEN8njj9"
+  accessSecret: "5IB6VSoMCmcyyhxktouRRVzkgTyMF7"
+  numOfMessages: 16 #一次最多消费3条(最多可设置为16条)
+  waitseconds: 30 #长轮询时间3秒（最多可设置为30秒）
+
+grpc_stream:
+  perRequest: 20 # RPS 单位s, 允许每秒处理的请求总数
+  processingTimeout: 2 #grpc 双向stream中，每个请求的最大处理时间，单位s

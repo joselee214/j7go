@@ -1,0 +1,49 @@
+# go-framwork
+
+```
+.
+├── Gopkg.lock									dep文件
+├── Gopkg.toml									dep文件
+├── cmd										    命令行启动相关
+│   └── cmd.go
+├── components									框架组件
+│   ├── config.go								框架配置相关
+│   ├── db.go									db相关, 提供全局变量components.M用于操作数据库
+│   ├── engine.go								框架主引擎
+│   ├── grpc.go									grpc相关
+│   ├── log.go									log相关, 提供全局变量components.L用于打印log
+│   ├── redis.go								redis相关, 提供全局变量components.R用于操作redis
+│   └── register.go								服务注册相关
+├── conf										配置文件, 项目模板里有此目录, 实际项目需要加到忽略文件里, 创建默认的conf_default目录存放配置
+│   ├── default
+│   │   └── config.yml
+│   ├── dev
+│   │   └── config.yml
+│   └── prod
+│       └── config.yml
+├── log											log目录, 需要加到忽略文件里
+│   ├── demo.log
+│   └── error.log
+├── main.go										项目入口文件
+├── models										db models目录
+│   └── const.go								models常量配置
+├── modules										moddules文件目录, 实现各种业务
+│   ├── greeter									demo, 实际项目删除即可
+│   │   ├── const.go
+│   │   └── order.go
+│   └── modules.go								用于moddules注册
+├── services									services目录
+│   └── orderService.go
+├── start.sh									本demo启动脚本, 可忽略
+└── templates									xo生成db models模板
+    ├── mysql.enum.go.tpl
+    ├── mysql.foreignkey.go.tpl
+    ├── mysql.index.go.tpl
+    ├── mysql.proc.go.tpl
+    ├── mysql.query.go.tpl
+    ├── mysql.querytype.go.tpl
+    ├── mysql.type.go.tpl
+    ├── xo_db.go.tpl
+    └── xo_package.go.tpl
+```
+
