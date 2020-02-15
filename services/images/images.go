@@ -3,8 +3,8 @@ package imagesService
 import (
 	"context"
 	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/errors"
-	"go.7yes.com/j7f/proto/images"
+	"j7go/errors"
+	"j7go/proto/images"
 	"go.uber.org/zap"
 	"time"
 	"j7go/models/images"

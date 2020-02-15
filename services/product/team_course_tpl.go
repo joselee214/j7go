@@ -3,8 +3,8 @@ package product
 import (
 	"context"
 	"go.7yes.com/j7f/proto/common"
-	"go.7yes.com/j7f/proto/images"
-	"go.7yes.com/j7f/proto/product"
+	"j7go/proto/images"
+	"j7go/proto/product"
 	"go.uber.org/zap"
 	"time"
 	"j7go/components"

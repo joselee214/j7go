@@ -2,9 +2,9 @@ package brand
 
 import (
 	"fmt"
-	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/errors"
-	"go.7yes.com/j7f/proto/brand"
+	ferrors "go.7yes.com/j7f/components/errors"
+	"j7go/errors"
+	"j7go/proto/brand"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"j7go/services/brand"
@@ -30,10 +30,10 @@ func (s *BrandService) GetShopList(srv brand.BrandServer_GetShopListServer) erro
 		res, err := brandService.GetShopList(srv.Context(), uint(params.BrandId))
 		if err != nil {
 			utils.GetTraceLog(srv.Context()).Error("brand", zap.Any("get_shop_list", err.Error()))
-			err = errors.NewFromCode(business_errors.BrandError_GET_SHOP_LIST_ERROR)
+			err = ferrors.NewFromCode(business_errors.BrandError_GET_SHOP_LIST_ERROR)
 		}
 
-		res.Status = errors.GetResHeader(err)
+		res.Status = ferrors.GetResHeader(err)
 
 		err = srv.Send(res)
 		if err != nil {

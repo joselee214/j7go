@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/r3labs/diff"
 	"go.7yes.com/j7f/proto/common"
-	"go.7yes.com/j7f/proto/product"
+	"j7go/proto/product"
 	"go.uber.org/zap"
 	"strconv"
 	"strings"

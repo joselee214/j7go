@@ -2,8 +2,8 @@ package product
 
 import (
 	"go.7yes.com/j7f/components/errors"
-	business_errors "go.7yes.com/j7f/errors"
-	"go.7yes.com/j7f/proto/product"
+	business_errors "j7go/errors"
+	"j7go/proto/product"
 	"go.uber.org/zap"
 	packageCourse "j7go/models/product"
 	product2 "j7go/services/product"

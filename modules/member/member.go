@@ -2,7 +2,7 @@ package member
 
 import (
 	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/proto/member"
+	"j7go/proto/member"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	memberService "j7go/services/member"

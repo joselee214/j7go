@@ -3,9 +3,9 @@ package pays
 import (
 	"context"
 	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/errors"
+	"j7go/errors"
 	"go.7yes.com/j7f/proto/common"
-	ps "go.7yes.com/j7f/proto/payments"
+	ps "j7go/proto/payments"
 	"go.uber.org/zap"
 	"time"
 	"j7go/models/payment"

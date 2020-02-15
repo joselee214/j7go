@@ -3,8 +3,8 @@ package shopService
 import (
 	"context"
 	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/errors"
-	"go.7yes.com/j7f/proto/shop"
+	"j7go/errors"
+	"j7go/proto/shop"
 	"time"
 	"j7go/components"
 	"j7go/models/region"

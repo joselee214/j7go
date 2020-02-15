@@ -9,7 +9,7 @@ import (
 	"go.uber.org/zap"
 	"context"
 	"go.7yes.com/j7f/components/grpc/server"
-	"go.7yes.com/j7f/proto/shop"
+	"j7go/proto/shop"
 	"go.7yes.com/j7f/proto/common"
 )
 

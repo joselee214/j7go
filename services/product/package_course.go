@@ -2,8 +2,8 @@ package product
 
 import (
 	"context"
-	"go.7yes.com/j7f/proto/images"
-	product2 "go.7yes.com/j7f/proto/product"
+	"j7go/proto/images"
+	product2 "j7go/proto/product"
 	"go.uber.org/zap"
 	"time"
 	"j7go/components"

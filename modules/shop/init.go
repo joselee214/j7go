@@ -1,7 +1,7 @@
 package shop
 
 import (
-	"go.7yes.com/j7f/proto/shop"
+	"j7go/proto/shop"
 	"google.golang.org/grpc"
 )
 

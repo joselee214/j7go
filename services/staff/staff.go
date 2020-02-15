@@ -3,8 +3,8 @@ package staff
 import (
 	"context"
 	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/errors"
-	"go.7yes.com/j7f/proto/staff"
+	"j7go/errors"
+	"j7go/proto/staff"
 	"go.uber.org/zap"
 	"time"
 	"j7go/components"

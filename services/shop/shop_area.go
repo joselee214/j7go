@@ -2,7 +2,7 @@ package shopService
 
 import (
 	"context"
-	"go.7yes.com/j7f/proto/shop"
+	"j7go/proto/shop"
 	"time"
 	"j7go/models/shop"
 	"j7go/utils"

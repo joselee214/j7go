@@ -34,7 +34,7 @@ require (
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
 	github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742
-	github.com/nsqio/go-nsq v1.0.7
+	github.com/nsqio/go-nsq v1.0.8
 	github.com/pelletier/go-toml v1.2.0
 	github.com/r3labs/diff v0.0.0-20190408153613-004a429b1a9e
 	github.com/smartystreets/assertions v0.0.0-20190401211740-f487f9de1cd3
@@ -55,9 +55,10 @@ require (
 	go.uber.org/multierr v1.1.0
 	go.uber.org/ratelimit v0.1.0
 	go.uber.org/zap v1.10.0
+	golang.org/x/net v0.0.0-20190522155817-f3200d17e092
 	google.golang.org/grpc v1.26.0
 	gopkg.in/go-playground/validator.v8 v8.18.2
-	gopkg.in/yaml.v2 v2.2.4
+	gopkg.in/yaml.v2 v2.2.8
 )
 
 replace go.7yes.com/j7f => /Users/joselee/go/src/go.7yes.com/j7f

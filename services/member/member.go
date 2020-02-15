@@ -2,7 +2,7 @@ package member
 
 import (
 	"context"
-	"go.7yes.com/j7f/proto/member"
+	"j7go/proto/member"
 	"time"
 	"j7go/components"
 	memberModel "j7go/models/member"

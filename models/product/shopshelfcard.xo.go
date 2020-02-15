@@ -9,7 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/Masterminds/squirrel"
-	"go.7yes.com/j7f/proto/product"
+	"j7go/proto/product"
 	"go.uber.org/zap"
 	"time"
 	"j7go/components"

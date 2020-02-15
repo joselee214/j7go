@@ -2,7 +2,7 @@ package product
 
 import (
 	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/proto/product"
+	"j7go/proto/product"
 	"go.uber.org/zap"
 	individual "j7go/services/product"
 	"j7go/utils"

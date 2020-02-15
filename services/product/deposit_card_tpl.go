@@ -2,7 +2,7 @@ package product
 
 import (
 	"context"
-	"go.7yes.com/j7f/proto/product"
+	"j7go/proto/product"
 	"time"
 	"j7go/components"
 	productModel "j7go/models/product"

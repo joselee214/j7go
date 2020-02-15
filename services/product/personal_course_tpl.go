@@ -3,8 +3,8 @@ package product
 import (
 	"context"
 	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/errors"
-	"go.7yes.com/j7f/proto/product"
+	"j7go/errors"
+	"j7go/proto/product"
 	"go.uber.org/zap"
 	"reflect"
 	"time"
