@@ -1,7 +1,7 @@
 package components
 
 import (
-	"go.7yes.com/go/components/dao"
+	"go.7yes.com/j7f/components/dao"
 	"go.uber.org/zap"
 )
 

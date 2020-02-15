@@ -1,9 +1,9 @@
 package shop
 
 import (
-	"go.7yes.com/go/components/errors"
-	"go.7yes.com/go/proto/common"
-	"go.7yes.com/go/proto/shop"
+	"go.7yes.com/j7f/components/errors"
+	"go.7yes.com/j7f/proto/common"
+	"go.7yes.com/j7f/proto/shop"
 	"go.uber.org/zap"
 	"j7go/services/shop"
 	"j7go/utils"

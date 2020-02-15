@@ -3,8 +3,8 @@ package product
 import (
 	"context"
 	"github.com/r3labs/diff"
-	"go.7yes.com/go/proto/common"
-	"go.7yes.com/go/proto/product"
+	"go.7yes.com/j7f/proto/common"
+	"go.7yes.com/j7f/proto/product"
 	"go.uber.org/zap"
 	"strconv"
 	"strings"

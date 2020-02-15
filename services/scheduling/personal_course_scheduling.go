@@ -2,7 +2,7 @@ package scheduling
 
 import (
 	"context"
-	"go.7yes.com/go/proto/scheduling"
+	"go.7yes.com/j7f/proto/scheduling"
 	"time"
 	"j7go/components"
 	"j7go/models/product"

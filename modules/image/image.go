@@ -1,8 +1,8 @@
 package image
 
 import (
-	"go.7yes.com/go/components/errors"
-	"go.7yes.com/go/proto/images"
+	"go.7yes.com/j7f/components/errors"
+	"go.7yes.com/j7f/proto/images"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"j7go/services/images"

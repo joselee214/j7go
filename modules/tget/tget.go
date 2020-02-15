@@ -3,7 +3,7 @@ package tget
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"go.7yes.com/go/components/http/server"
+	"go.7yes.com/j7f/components/http/server"
 	"j7go/components"
 	"j7go/models"
 	"net/http"

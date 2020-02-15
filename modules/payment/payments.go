@@ -1,8 +1,8 @@
 package payment
 
 import (
-	"go.7yes.com/go/components/errors"
-	"go.7yes.com/go/proto/payments"
+	"go.7yes.com/j7f/components/errors"
+	"go.7yes.com/j7f/proto/payments"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"j7go/services/pays"

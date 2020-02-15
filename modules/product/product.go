@@ -1,7 +1,7 @@
 package product
 
 import (
-	"go.7yes.com/go/proto/product"
+	"go.7yes.com/j7f/proto/product"
 	"google.golang.org/grpc"
 )
 

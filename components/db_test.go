@@ -3,7 +3,7 @@ package components
 import (
 	"testing"
 
-	"go.7yes.com/go/components/dao"
+	"go.7yes.com/j7f/components/dao"
 )
 
 var DbConfig = &dao.DBConfig{

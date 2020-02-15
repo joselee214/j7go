@@ -2,9 +2,9 @@ package brand
 
 import (
 	"fmt"
-	"go.7yes.com/go/components/errors"
-	"go.7yes.com/go/errors"
-	"go.7yes.com/go/proto/brand"
+	"go.7yes.com/j7f/components/errors"
+	"go.7yes.com/j7f/errors"
+	"go.7yes.com/j7f/proto/brand"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"j7go/services/brand"

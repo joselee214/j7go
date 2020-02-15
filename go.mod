@@ -49,7 +49,7 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0
 	github.com/valyala/fasthttp v0.0.0-20171207120941-e5f51c11919d
 	github.com/xo/dburl v0.0.0-20191219122722-3cca8608d645
-	go.7yes.com/go v0.0.1
+	go.7yes.com/j7f v0.0.1
 	go.etcd.io/etcd v3.3.18+incompatible
 	go.uber.org/atomic v1.4.0
 	go.uber.org/multierr v1.1.0
@@ -60,4 +60,4 @@ require (
 	gopkg.in/yaml.v2 v2.2.4
 )
 
-replace go.7yes.com/go => /Users/joselee/go/src/go.7yes.com/go
+replace go.7yes.com/j7f => /Users/joselee/go/src/go.7yes.com/j7f

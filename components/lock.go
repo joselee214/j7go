@@ -1,7 +1,7 @@
 package components
 
 import (
-	"go.7yes.com/go/components/lock"
+	"go.7yes.com/j7f/components/lock"
 	"sync"
 )
 

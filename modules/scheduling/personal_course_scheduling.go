@@ -1,9 +1,9 @@
 package scheduling
 
 import (
-	"go.7yes.com/go/components/errors"
-	"go.7yes.com/go/errors"
-	"go.7yes.com/go/proto/scheduling"
+	"go.7yes.com/j7f/components/errors"
+	"go.7yes.com/j7f/errors"
+	"go.7yes.com/j7f/proto/scheduling"
 	"go.uber.org/zap"
 	schedulingService "j7go/services/scheduling"
 	"j7go/utils"

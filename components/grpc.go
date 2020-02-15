@@ -1,8 +1,8 @@
 package components
 
 import (
-	"go.7yes.com/go/components/grpc/interceptor"
-	"go.7yes.com/go/components/grpc/server"
+	"go.7yes.com/j7f/components/grpc/interceptor"
+	"go.7yes.com/j7f/components/grpc/server"
 	"google.golang.org/grpc"
 	"net"
 	"time"

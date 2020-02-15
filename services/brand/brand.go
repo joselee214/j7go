@@ -2,7 +2,7 @@ package brandService
 
 import (
 	"context"
-	"go.7yes.com/go/proto/brand"
+	"go.7yes.com/j7f/proto/brand"
 	"j7go/models/shop"
 )
 

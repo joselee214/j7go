@@ -1,8 +1,8 @@
 package staff
 
 import (
-	"go.7yes.com/go/components/errors"
-	"go.7yes.com/go/proto/staff"
+	"go.7yes.com/j7f/components/errors"
+	"go.7yes.com/j7f/proto/staff"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	st "j7go/services/staff"

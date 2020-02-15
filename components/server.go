@@ -3,8 +3,8 @@ package components
 import (
 	"fmt"
 	"github.com/google/uuid"
-	"go.7yes.com/go/components/grace"
-	"go.7yes.com/go/components/service_register"
+	"go.7yes.com/j7f/components/grace"
+	"go.7yes.com/j7f/components/service_register"
 	"google.golang.org/grpc"
 	"net"
 	"strconv"

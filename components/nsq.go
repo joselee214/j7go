@@ -3,7 +3,7 @@ package components
 import (
 	"fmt"
 	"github.com/nsqio/go-nsq"
-	"go.7yes.com/go/components/mq"
+	"go.7yes.com/j7f/components/mq"
 	"go.uber.org/zap"
 )
 

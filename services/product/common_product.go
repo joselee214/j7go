@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/r3labs/diff"
-	"go.7yes.com/go/proto/product"
+	"go.7yes.com/j7f/proto/product"
 	"go.uber.org/zap"
 	"time"
 	"j7go/models/images"

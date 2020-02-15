@@ -2,11 +2,11 @@ package components
 
 import (
 	"github.com/fsnotify/fsnotify"
-	"go.7yes.com/go/components/config"
-	"go.7yes.com/go/components/dao"
-	"go.7yes.com/go/components/grpc/server"
-	"go.7yes.com/go/components/log"
-	"go.7yes.com/go/components/service_register"
+	"go.7yes.com/j7f/components/config"
+	"go.7yes.com/j7f/components/dao"
+	"go.7yes.com/j7f/components/grpc/server"
+	"go.7yes.com/j7f/components/log"
+	"go.7yes.com/j7f/components/service_register"
 	"go.uber.org/zap"
 )
 

@@ -9,7 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/Masterminds/squirrel"
-	"go.7yes.com/go/proto/common"
+	"go.7yes.com/j7f/proto/common"
 	"j7go/components"
 	"j7go/utils"
 
