@@ -19,7 +19,11 @@ func NewGrpcServer(serverConfig *NodeServerConfig, grpcOpts ...grpc.ServerOption
 	tcpAddr := new(net.TCPAddr)
 	tcpAddr.IP = net.ParseIP(serverConfig.Ip)
 	tcpAddr.Port = serverConfig.Port
-	return server.NewGrpcServer(tcpAddr, grpcOpts...)
+	s,err := server.NewGrpcServer(tcpAddr, grpcOpts...)
+	if err==nil{
+		s.Config = map[string]interface{}{"modules":serverConfig.EnableModules}
+	}
+	return s,err
 }
 
 func NewGrpcClient(grpcClientConfig *GrpcClientConfig) error {
@@ -27,12 +31,12 @@ func NewGrpcClient(grpcClientConfig *GrpcClientConfig) error {
 	return nil
 }
 
-func RegisterInterceptors(e *Engine) {
-	e.RegisterStreamInterceptors(
+func RegisterInterceptors(s Server,e *Engine) {
+	s.RegisterStreamInterceptors(
 		interceptor.StreamServerErrorInterceptor(L),
 		interceptor.StreamServerTraceInterceptor(L, e.Opts.GrpcStreamConfig),
 	)
-	e.RegisterUnaryInterceptors(
+	s.RegisterUnaryInterceptors(
 		interceptor.UnaryServerErrorInterceptor(L),
 		//TODO:: unaryCall trace_id 拦截器
 	)

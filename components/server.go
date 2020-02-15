@@ -2,12 +2,14 @@ package components
 
 import (
 	"fmt"
+	"github.com/google/uuid"
 	"go.7yes.com/go/components/grace"
 	"go.7yes.com/go/components/service_register"
 	"google.golang.org/grpc"
 	"net"
 	"strconv"
 	"strings"
+	"time"
 )
 
 const RAND_PORT = 0
@@ -20,6 +22,7 @@ type NodeServerConfig struct {
 	Protocol string
 	NodeId  string
 	Version string
+	EnableModules []string
 }
 
 type Server interface {
@@ -40,6 +43,7 @@ func NewServer(e *Engine, grpcOpts ...grpc.ServerOption) error {
 	var err error
 
 	for index, serverConfig := range e.Opts.ServerConfig {
+
 		protocol := strings.ToUpper(serverConfig.Protocol)
 		switch protocol {
 		case "HTTP":
@@ -47,15 +51,15 @@ func NewServer(e *Engine, grpcOpts ...grpc.ServerOption) error {
 			if err != nil {
 				return fmt.Errorf("new http server err: %s", err)
 			}
+			RegisterMiddleware(server)
 			e.Server = append(e.Server, server)
-			RegisterMiddleware(e)
 		case "GRPC":
 			server, err = NewGrpcServer(serverConfig, grpcOpts...)
 			if err != nil {
 				return fmt.Errorf("new grpc server err: %s", err)
 			}
+			RegisterInterceptors(server,e)
 			e.Server = append(e.Server, server)
-			RegisterInterceptors(e)
 		default:
 			return fmt.Errorf("server protocol set err")
 		}
@@ -77,12 +81,19 @@ func NewServer(e *Engine, grpcOpts ...grpc.ServerOption) error {
 		}
 
 		if serverConfig.NodeId  == "" {
-			//TODO 这里需要随机生成 nodeId
-			fmt.Println("====zzz===>", e.Opts.ServerConfig[index].NodeId )
+			//e.Opts.ServerConfig[index].NodeId = strings.Replace(s, `\`, `\\\`, -1)
+			e.Opts.ServerConfig[index].NodeId = NewNid()
 		}
-
 
 		e.GraceSrv = append(e.GraceSrv, grace.NewServer(server)) //grace use to hot reload
 	}
 	return nil
+}
+
+func NewNid() string {
+	t := time.Now().String()
+	timeStr := t[2:26]
+	tStr := strings.Replace(strings.Replace(strings.Replace(strings.Replace(timeStr, `:`, ``, -1), `.`, ``, -1), ` `, ``, -1), `-`, ``, -1)
+	uuidbyte,_ := uuid.NewUUID()
+	return tStr+"-"+uuidbyte.String()
 }

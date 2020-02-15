@@ -12,11 +12,15 @@ func NewHttpServ(serverConfig *NodeServerConfig) (*server.HttpServer, error) {
 	tcpAddr.IP = net.ParseIP(serverConfig.Ip)
 	tcpAddr.Port = serverConfig.Port
 	env := os.Getenv("RUNTIME_ENV")
-	return server.NewHttpServer(tcpAddr, L, env)
+	s,err := server.NewHttpServer(tcpAddr, L, env)
+	if err==nil{
+		s.Config = map[string]interface{}{"modules":serverConfig.EnableModules}
+	}
+	return s,err
 }
 
-func RegisterMiddleware(e *Engine) {
-	e.RegisterUnaryInterceptors(
+func RegisterMiddleware(s Server) {
+	s.RegisterUnaryInterceptors(
 		middleware.Logger(L),
 		middleware.JsonParam(),
 		middleware.Recovery(L),

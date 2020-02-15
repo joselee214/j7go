@@ -85,18 +85,18 @@ func (e *Engine) RegisterModules(f ...interface{}) {
 		srv.RegisterCb(f...)
 	}
 }
-
-func (e *Engine) RegisterStreamInterceptors(f ...interface{}) {
-	for _, srv := range e.Server {
-		srv.RegisterStreamInterceptors(f...)
-	}
-}
-
-func (e *Engine) RegisterUnaryInterceptors(f ...interface{}) {
-	for _, srv := range e.Server {
-		srv.RegisterUnaryInterceptors(f...)
-	}
-}
+//
+//func (e *Engine) RegisterStreamInterceptors(f ...interface{}) {
+//	for _, srv := range e.Server {
+//		srv.RegisterStreamInterceptors(f...)
+//	}
+//}
+//
+//func (e *Engine) RegisterUnaryInterceptors(f ...interface{}) {
+//	for _, srv := range e.Server {
+//		srv.RegisterUnaryInterceptors(f...)
+//	}
+//}
 
 func (e *Engine) Run() {
 	for index, server := range e.Server {

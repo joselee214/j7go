@@ -3,6 +3,8 @@ package components
 import (
 	"encoding/json"
 	"go.7yes.com/go/components/service_register"
+	"go.7yes.com/go/util"
+	"strings"
 	"time"
 )
 
@@ -26,7 +28,7 @@ func (r *Register) Register(e *Engine, index int) error {
 	node := service_register.NewNode(e.Opts.ServerConfig[index].NodeId,
 		e.Opts.ServerConfig[index].Ip,
 		e.Opts.ServerConfig[index].Port,
-		map[string]string{"protocol": e.Opts.ServerConfig[index].Protocol})
+		map[string]string{"protocol": e.Opts.ServerConfig[index].Protocol,"ips": strings.Join(util.GetLocalIps(),",")})
 
 	serviceInfo := e.Server[index].GetServicesInfo()
 	for k, v := range serviceInfo {
@@ -63,3 +65,4 @@ func (r *Register) Register(e *Engine, index int) error {
 	rr := *service_register.NewRegisterOpts(data, etcdCli)
 	return rr.Register()
 }
+

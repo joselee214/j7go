@@ -18,6 +18,7 @@ var rootCmd = &cobra.Command{
 	Short: "j7go is a test go framework",
 	Long:  `j7go is a test go framework`,
 	RunE: func(cmd *cobra.Command, args []string) (err error) {
+
 		components.E, err = components.NewEngine(cfgFile)
 		if err != nil {
 			panic(fmt.Errorf("new engine err %s", err))

@@ -11,7 +11,7 @@ import (
 
 func Init(g *gin.Engine) {
 	s := &TgetController{}
-	g.GET("test",s.test)
+	g.GET("/test",s.test)
 }
 
 
