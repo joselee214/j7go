@@ -2,8 +2,8 @@ package components
 
 import (
 	"fmt"
-	"go.7yes.com/j7f/components/grace"
-	"go.7yes.com/j7f/components/lock"
+	"github.com/joselee214/j7f/components/grace"
+	"github.com/joselee214/j7f/components/lock"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 )

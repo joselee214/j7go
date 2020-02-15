@@ -1,8 +1,8 @@
 package components
 
 import (
-	"go.7yes.com/j7f/components/http/middleware"
-	"go.7yes.com/j7f/components/http/server"
+	"github.com/joselee214/j7f/components/http/middleware"
+	"github.com/joselee214/j7f/components/http/server"
 	"net"
 	"os"
 )

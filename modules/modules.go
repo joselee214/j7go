@@ -2,8 +2,8 @@ package modules
 
 import (
 	"fmt"
-	grpcServer "go.7yes.com/j7f/components/grpc/server"
-	httpServer "go.7yes.com/j7f/components/http/server"
+	grpcServer "github.com/joselee214/j7f/components/grpc/server"
+	httpServer "github.com/joselee214/j7f/components/http/server"
 	"google.golang.org/grpc/reflection"
 	"j7go/components"
 	"j7go/modules/brand"

@@ -6,7 +6,7 @@ package shop // import "j7go/proto/shop"
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import common "go.7yes.com/j7f/proto/common"
+import common "github.com/joselee214/j7f/proto/common"
 import images "j7go/proto/images"
 
 import (

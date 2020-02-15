@@ -6,7 +6,7 @@ package urban // import "j7go/proto/urban"
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import common "go.7yes.com/j7f/proto/common"
+import common "github.com/joselee214/j7f/proto/common"
 
 import (
 	context "golang.org/x/net/context"

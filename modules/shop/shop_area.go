@@ -5,8 +5,8 @@ import (
 	"go.uber.org/zap"
 	"j7go/utils"
 	"j7go/services/shop"
-	"go.7yes.com/j7f/components/errors"
-	"go.7yes.com/j7f/proto/common"
+	"github.com/joselee214/j7f/components/errors"
+	"github.com/joselee214/j7f/proto/common"
 )
 
 type ShopAreaService struct {

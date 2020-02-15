@@ -1,7 +1,7 @@
 package components
 
 import (
-	"go.7yes.com/j7f/components/log"
+	"github.com/joselee214/j7f/components/log"
 )
 
 var L *log.Logger

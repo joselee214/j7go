@@ -2,7 +2,7 @@ package product
 
 import (
 	"context"
-	"go.7yes.com/j7f/proto/common"
+	"github.com/joselee214/j7f/proto/common"
 	"j7go/proto/images"
 	"j7go/proto/product"
 	"go.uber.org/zap"

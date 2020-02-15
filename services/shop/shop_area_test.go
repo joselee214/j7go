@@ -3,14 +3,14 @@ package shopService
 import (
 	"testing"
 	. "github.com/smartystreets/goconvey/convey"
-	"go.7yes.com/j7f/components/dao"
+	"github.com/joselee214/j7f/components/dao"
 	"j7go/components"
-	"go.7yes.com/j7f/components/log"
+	"github.com/joselee214/j7f/components/log"
 	"go.uber.org/zap"
 	"context"
-	"go.7yes.com/j7f/components/grpc/server"
+	"github.com/joselee214/j7f/components/grpc/server"
 	"j7go/proto/shop"
-	"go.7yes.com/j7f/proto/common"
+	"github.com/joselee214/j7f/proto/common"
 )
 
 func TestSaveShopArea(t *testing.T) {

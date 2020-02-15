@@ -2,8 +2,8 @@ package components
 
 import (
 	"encoding/json"
-	"go.7yes.com/j7f/components/service_register"
-	"go.7yes.com/j7f/util"
+	"github.com/joselee214/j7f/components/service_register"
+	"github.com/joselee214/j7f/util"
 	"strings"
 	"time"
 )

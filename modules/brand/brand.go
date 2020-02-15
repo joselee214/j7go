@@ -2,7 +2,7 @@ package brand
 
 import (
 	"fmt"
-	ferrors "go.7yes.com/j7f/components/errors"
+	ferrors "github.com/joselee214/j7f/components/errors"
 	"j7go/errors"
 	"j7go/proto/brand"
 	"go.uber.org/zap"

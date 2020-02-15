@@ -2,9 +2,9 @@ package pays
 
 import (
 	"context"
-	"go.7yes.com/j7f/components/errors"
+	"github.com/joselee214/j7f/components/errors"
 	"j7go/errors"
-	"go.7yes.com/j7f/proto/common"
+	"github.com/joselee214/j7f/proto/common"
 	ps "j7go/proto/payments"
 	"go.uber.org/zap"
 	"time"

@@ -2,7 +2,7 @@ package utils
 
 import (
 	"context"
-	"go.7yes.com/j7f/components/grpc/server"
+	"github.com/joselee214/j7f/components/grpc/server"
 	"go.uber.org/zap"
 	"j7go/components"
 	"time"

@@ -1,7 +1,7 @@
 package image
 
 import (
-	"go.7yes.com/j7f/components/errors"
+	"github.com/joselee214/j7f/components/errors"
 	"j7go/proto/images"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
