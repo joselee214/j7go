@@ -58,7 +58,7 @@ db:
   name: "j7go"
   maxConnNum: 10
   maxIdleConns: 5
-  MaxLifetime:  40
+  MaxLifetime:  30
   master:
     addr: "127.0.0.1:3306"
     user: "root"
