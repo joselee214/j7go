@@ -16,6 +16,9 @@ server:
     protocol: "grpc"  #grpc
     #nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
     version: "1.0"
+    enableModules:
+      - xx
+      - zzz
   - ip: "0.0.0.0"
     port: 0
     protocol: "http"  #grpc
@@ -55,7 +58,7 @@ redis:
   MaxConnLifetime: 600
 
 db:
-  name: "j7go"
+  name: "ypcfx"
   maxConnNum: 10
   maxIdleConns: 5
   MaxLifetime:  30

@@ -6,7 +6,6 @@ import (
 	httpServer "github.com/joselee214/j7f/components/http/server"
 	"google.golang.org/grpc/reflection"
 	"j7go/components"
-	"j7go/modules/brand"
 	"j7go/modules/tget"
 	"os"
 )
@@ -22,7 +21,8 @@ func RegisterModules(e *components.Engine) {
 		fmt.Println( "config grpc...", s.Config )
 
 		gs := s.GetEngine()
-		brand.Init(gs)
+		//brand.Init(gs)
+
 		if os.Getenv("RUNTIME_ENV") != "prod" {
 			reflection.Register(gs) //正式环境去掉//
 		}

@@ -20,8 +20,8 @@ type TgetController struct {
 }
 
 func (ctrl *TgetController) test(ctx *gin.Context)  {
-	param,_ := ctx.GetQuery("zzz")
-	fmt.Println("=======>",param)
+	//param,_ := ctx.GetQuery("zzz")
+	//fmt.Println("=======>",param)
 	dbConn, _ := components.M.GetSlaveConn()
 	data,err := models.InitdbByID(dbConn,1)
 	if err != nil {
