@@ -6,31 +6,45 @@ log:
     levelKey: "level"
     nameKey: "greeterSrv"
   outputPaths:
-    - stdout
+    - /logs/j7go/demo.log
   ErrorOutputPaths:
-    - stderr
+    - /logs/j7go/error.log
 
 server:
   - ip: "0.0.0.0"
     port: 0
-    protocol: "grpc"
-
-node:
-  nodeId: "1"
-  version: "1.0"
+    protocol: "grpc"  #grpc
+    #nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
+    version: "1.0"
+    enableModules:
+      - xx
+      - zzz
+#  - ip: "0.0.0.0"
+#    port: 8082
+#    protocol: "http"  #grpc
+#    #nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
+#    version: "1.0"
+#  - ip: "0.0.0.0"
+#    port: 8081
+#    protocol: "http"  #grpc
+#    #nodeId: "1"
+#    version: "1.0"
+#    enableModules:
+#      - tget
 
 service:
   key: "/7YES_SERVICE/SERVICE/j7go"
-  ttl: 1000 # 单位s
-  heartbeat: 100 # 单位s heartbeat的设置要比ttl略小, 防止过期
+  ttl: 8 # 单位s
+  heartbeat: 5 # 单位s heartbeat的设置要比ttl略小, 防止过期
 
+#注释掉即可不注册etcd##
 etcd:
   endpoints:
     - "127.0.0.1:2379"
-  autoSyncInterval: 10
-  dialTimeout: 10
-  dialKeepAliveTime: 10
-  dialKeepAliveTimeout: 10
+  autoSyncInterval: 3
+  dialTimeout: 3
+  dialKeepAliveTime: 3
+  dialKeepAliveTimeout: 3
   username: ""
   password: ""
 
@@ -45,20 +59,25 @@ redis:
   MaxConnLifetime: 600
 
 db:
-  name: "j7go"
+  name: "a_ypc_ddg"
   maxConnNum: 10
   maxIdleConns: 5
+  MaxLifetime:  30
+  PingTickerTime: 9   #小于mysql的	interactive timeout
   master:
     addr: "127.0.0.1:3306"
     user: "root"
     password: "awerli123"
+    timezone: "Asia/Shanghai"
     weight: 1
   slave:
     -
       addr: "127.0.0.1:3306"
       user: "root"
       password: "awerli123"
+      timezone: "Asia/Shanghai"
       weight: 1
+
 nsq:
   config:
     poolCap: 1 #producer connect pool max number, set to 0 that means Unlimited

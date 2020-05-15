@@ -34,7 +34,7 @@ var rootCmd = &cobra.Command{
 		waiter := sync.WaitGroup{}
 		waiter.Add(1)
 
-		go components.E.Run()
+		go components.E.Run()	//启动服务//注册etcd
 
 		waiter.Wait()
 		return nil

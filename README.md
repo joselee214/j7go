@@ -47,3 +47,12 @@
     └── xo_package.go.tpl
 ```
 
+
+
+
+xo mysql://root:awerli123@127.0.0.1/ypcfx -o models --template-path /Users/joselee/codes/j7go/templates
+
+RUNTIME_ENV=dev go run main.go
+
+
+GRPC 调试  grpcui -plaintext 127.0.0.1:65332

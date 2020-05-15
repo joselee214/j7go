@@ -23,6 +23,11 @@ func NewRegister() *Register {
 }
 
 func (r *Register) Register(e *Engine, index int) error {
+
+	if e.Opts.EtcdConfig == nil {
+		return nil
+	}
+
 	var nodeServiceInfo []*service_register.ServiceInfo
 
 	node := service_register.NewNode(e.Opts.ServerConfig[index].NodeId,
