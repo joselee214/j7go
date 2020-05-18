@@ -26,13 +26,13 @@ server:
 #    protocol: "http"  #grpc
 #    #nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
 #    version: "1.0"
-#  - ip: "0.0.0.0"
-#    port: 8081
-#    protocol: "http"  #grpc
-#    #nodeId: "1"
-#    version: "1.0"
-#    enableModules:
-#      - tget
+  - ip: "0.0.0.0"
+    port: 7002
+    protocol: "http"  #grpc
+    #nodeId: "1"
+    version: "1.0"
+    enableModules:
+      - tget
 
 
 grpc_stream:

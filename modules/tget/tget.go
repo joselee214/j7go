@@ -22,7 +22,7 @@ func (ctrl *TgetController) test(ctx *gin.Context)  {
 	//param,_ := ctx.GetQuery("zzz")
 	//fmt.Println("=======>",param)
 	//dbConn, _ := components.M.GetSlaveConn()       //"j7go/components"
-	data,err := ddg.DdgAdminUserByID(ctx,1)
+	data,err := ddg.DdgAdminUserGroupsByGid(ctx,1)
 	if err != nil {
 		fmt.Println("======x=>",err)
 	}

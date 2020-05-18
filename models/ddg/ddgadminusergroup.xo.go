@@ -263,6 +263,7 @@ func DdgAdminUserGroupsByGid(ctx context.Context, gid int, key ...interface{}) (
 	utils.GetTraceLog(ctx).Debug("DB", zap.String("SQL", fmt.Sprint(sqlstr, gid)))
 
 	tx, err := components.M.GetConnFromCtx(ctx)
+
 	if err != nil {
 		dbConn, err = components.M.GetSlaveConn()
 		if err != nil {
