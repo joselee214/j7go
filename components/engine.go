@@ -118,6 +118,8 @@ func (e *Engine) Run() {
 				zap.String("service_node_id", e.Opts.ServerConfig[index].NodeId),
 				zap.String("service_node_version", e.Opts.ServerConfig[index].Version))
 
+			//fmt.Println("SERVICE START", e.Opts.ServerConfig[index].Ip,e.Opts.ServerConfig[index].Port )
+
 			err = e.GraceSrv[index].ListenAndServe()
 			if err != nil {
 				panic(fmt.Errorf("start service err %s", err))
