@@ -3,16 +3,16 @@ package product
 import (
 	"context"
 	"github.com/joselee214/j7f/components/errors"
-	"j7go/errors"
-	"j7go/proto/product"
 	"go.uber.org/zap"
-	"reflect"
-	"time"
 	"j7go/components"
-	"j7go/models/images"
-	productModel "j7go/models/product"
+	"j7go/errors"
+	"j7go/models/tests/images"
+	productModel "j7go/models/tests/product"
+	"j7go/proto/product"
 	"j7go/services/images"
 	"j7go/utils"
+	"reflect"
+	"time"
 )
 
 //新增私教课基础信息
@@ -172,7 +172,7 @@ func SetCourseImages(ctx context.Context,albumId uint, img string) error {
 
 //设置课程训练目标
 func SetCourseTrainAim(ctx context.Context,courseId uint,newAimIds []uint32) error {
-	currentTrainAims, err := productModel.GetCourseTrainAimsById(ctx,courseId,productModel.COURSE_PERSONAL)
+	currentTrainAims, err := productModel.GetCourseTrainAimsById(ctx,courseId, productModel.COURSE_PERSONAL)
 	if err != nil {
 		utils.GetTraceLog(ctx).Error("get course train aims fail",zap.String("scope","SetCourseTrainAim"),
 			zap.Uint("course_id",courseId),zap.String("err_msg",err.Error()))
@@ -186,13 +186,13 @@ func SetCourseTrainAim(ctx context.Context,courseId uint,newAimIds []uint32) err
 		formatCreateIds[index] = uint32(createId)
 	}
 
-	err = productModel.CourseSettingRelationBatchInsert(ctx,courseId,productModel.COURSE_PERSONAL,formatCreateIds)
+	err = productModel.CourseSettingRelationBatchInsert(ctx,courseId, productModel.COURSE_PERSONAL,formatCreateIds)
 	if err != err {
 		utils.GetTraceLog(ctx).Error("batch insert train aim fail",zap.String("scope","SetCourseTrainAim"),
 			zap.Uint("course_id",courseId),zap.Any("aim_ids",newAimIds),zap.String("err_msg",err.Error()))
 		return errors.NewFromCode(business_errors.ProductError_SET_TRAIN_AIM_ERROR)
 	}
-	err = productModel.CourseSettingRelationBatchDelete(ctx,courseId,productModel.COURSE_PERSONAL,deleteIds)
+	err = productModel.CourseSettingRelationBatchDelete(ctx,courseId, productModel.COURSE_PERSONAL,deleteIds)
 	if err != err {
 		utils.GetTraceLog(ctx).Error("batch delete train aim fail",zap.String("scope","SetCourseTrainAim"),
 			zap.Uint("course_id",courseId),zap.Any("delete_ids",deleteIds),zap.String("err_msg",err.Error()))
@@ -402,7 +402,7 @@ func UpdateCourseSalePriceSetting(ctx context.Context, courseId uint, priceSetti
 //处理课程支持门店逻辑
 func HandleSupportShops(ctx context.Context, course *productModel.PersonalCourseTemplate, currentShopSetting int8, shopIds []uint32) error {
 	//查询当前已存在关联关系
-	currentSupportShops,err := productModel.ProductSupportShopByProductId(ctx,course.ID,productModel.PRODUCT_PERSONAL_COURSE)
+	currentSupportShops,err := productModel.ProductSupportShopByProductId(ctx,course.ID, productModel.PRODUCT_PERSONAL_COURSE)
 	if err != nil {
 		utils.GetTraceLog(ctx).Error("get current support shop fail",zap.String("scope","HandleSupportShops"),
 			zap.Uint("course_id",course.ID),zap.String("err_msg",err.Error()))
@@ -410,7 +410,7 @@ func HandleSupportShops(ctx context.Context, course *productModel.PersonalCourse
 	}
 
 	if productModel.SHOP_SETTING_ALL == currentShopSetting {
-		err = productModel.DeleteAllSupportShopByProductId(ctx,course.ID,productModel.PRODUCT_PERSONAL_COURSE)
+		err = productModel.DeleteAllSupportShopByProductId(ctx,course.ID, productModel.PRODUCT_PERSONAL_COURSE)
 		if err != nil {
 			utils.GetTraceLog(ctx).Error("delete all support shops fail",zap.String("scope","HandleSupportShops"),
 				zap.Uint("course_id",course.ID),zap.String("err_msg",err.Error()))
@@ -420,13 +420,13 @@ func HandleSupportShops(ctx context.Context, course *productModel.PersonalCourse
 		currentShopIds := GetCurrentIds(ctx,currentSupportShops)
 		GetDiffIds(ctx,currentShopIds,shopIds)
 		createIds,deleteIds := GetDiffIds(ctx,currentShopIds,shopIds)
-		err = InsertNewSupportShops(ctx,createIds,uint(course.BrandID),course.ID,productModel.COURSE_PERSONAL)
+		err = InsertNewSupportShops(ctx,createIds,uint(course.BrandID),course.ID, productModel.COURSE_PERSONAL)
 		if err != nil {
 			utils.GetTraceLog(ctx).Error("insert new support shops fail",zap.String("scope","HandleSupportShops"),
 				zap.Uint("course_id",course.ID),zap.String("err_msg",err.Error()))
 			return errors.NewFromCode(business_errors.ProductError_SET_COURSE_SHOPS_ERROR)
 		}
-		err = DeleteUnsupportShops(ctx,deleteIds,course.ID,productModel.COURSE_PERSONAL)
+		err = DeleteUnsupportShops(ctx,deleteIds,course.ID, productModel.COURSE_PERSONAL)
 		if err != nil {
 			utils.GetTraceLog(ctx).Error("delete unsupport shops fail",zap.String("scope","HandleSupportShops"),
 				zap.Uint("course_id",course.ID),zap.String("err_msg",err.Error()))
@@ -448,14 +448,14 @@ func HandleSupportCoaches(ctx context.Context,course *productModel.PersonalCours
 	currentSupportCoacheIds := GetCurrentIds(ctx,currentSupportCoaches)
 	createIds,deleteIds := GetDiffIds(ctx,currentSupportCoacheIds,coachIds)
 
-	err = InsertNewSupportCoaches(ctx,createIds,uint(course.BrandID),uint(course.ID),productModel.COURSE_PERSONAL)
+	err = InsertNewSupportCoaches(ctx,createIds,uint(course.BrandID),uint(course.ID), productModel.COURSE_PERSONAL)
 	if err != nil {
 		utils.GetTraceLog(ctx).Error("insert new support coaches fail",zap.String("scope","HandleSupportCoaches"),
 			zap.Uint("course_id",course.ID),zap.String("err_msg",err.Error()))
 		return errors.NewFromCode(business_errors.ProductError_SET_COURSE_COACH_ERROR)
 	}
 
-	err = DeleteUnsupportCoaches(ctx,deleteIds,uint(course.ID),productModel.COURSE_PERSONAL)
+	err = DeleteUnsupportCoaches(ctx,deleteIds,uint(course.ID), productModel.COURSE_PERSONAL)
 	if err != nil {
 		utils.GetTraceLog(ctx).Error("delete unsupport coaches fail",zap.String("scope","HandleSupportCoaches"),
 			zap.Uint("course_id",course.ID),zap.String("err_msg",err.Error()))

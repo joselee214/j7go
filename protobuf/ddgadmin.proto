@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package ddgadmin;
+
+service ddgAdminFront{
+    rpc ValidateUserAccountAndPwd (ValidateRequest) returns (ValidateResponse) {}
+}
+
+message ValidateRequest {
+    string account = 1;
+    string password = 2;
+    string application = 3;
+}
+
+message ValidateResponse {
+    int32 success = 1;
+    string msg = 2;
+    int64 uid = 3;
+}

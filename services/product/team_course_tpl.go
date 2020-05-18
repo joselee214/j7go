@@ -3,15 +3,15 @@ package product
 import (
 	"context"
 	"github.com/joselee214/j7f/proto/common"
+	"go.uber.org/zap"
+	"j7go/components"
+	imageModel "j7go/models/tests/images"
+	productModel "j7go/models/tests/product"
 	"j7go/proto/images"
 	"j7go/proto/product"
-	"go.uber.org/zap"
-	"time"
-	"j7go/components"
-	imageModel "j7go/models/images"
-	productModel "j7go/models/product"
 	"j7go/services/images"
 	"j7go/utils"
+	"time"
 )
 
 func AddTeamCourseTpl(ctx context.Context, c *product.CourseTplRequest) (id uint, err error) {

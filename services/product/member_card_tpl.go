@@ -2,19 +2,19 @@ package product
 
 import (
 	"context"
-	"github.com/r3labs/diff"
 	"github.com/joselee214/j7f/proto/common"
-	"j7go/proto/product"
+	"github.com/r3labs/diff"
 	"go.uber.org/zap"
+	"j7go/components"
+	"j7go/models/tests/images"
+	productModel "j7go/models/tests/product"
+	"j7go/models/tests/shop"
+	"j7go/proto/product"
+	"j7go/services/images"
+	"j7go/utils"
 	"strconv"
 	"strings"
 	"time"
-	"j7go/components"
-	"j7go/models/images"
-	productModel "j7go/models/product"
-	"j7go/models/shop"
-	"j7go/services/images"
-	"j7go/utils"
 )
 
 func AddMemberCardTpl(ctx context.Context, p *product.MemberCardTplRequest) error {

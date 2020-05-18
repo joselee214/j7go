@@ -2,13 +2,13 @@ package product
 
 import (
 	"context"
-	"j7go/proto/product"
-	"time"
 	"j7go/components"
-	productModel "j7go/models/product"
-	"j7go/models/shop"
+	productModel "j7go/models/tests/product"
+	"j7go/models/tests/shop"
+	"j7go/proto/product"
 	"j7go/services/images"
 	"j7go/utils"
+	"time"
 )
 
 func AddDepositCardTpl(ctx context.Context, request *product.AddAndUpdateDepositCardTplRequest) (Id uint, error error) {

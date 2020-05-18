@@ -17,8 +17,8 @@ server:
     #nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
     version: "1.0"
     enableModules:
-      - xx
-      - zzz
+      - brand
+      - ddgadmin
 #  - ip: "0.0.0.0"
 #    port: 8082
 #    protocol: "http"  #grpc
@@ -59,7 +59,7 @@ redis:
   MaxConnLifetime: 600
 
 db:
-  name: "a_ypc_ddg"
+  name: "aypcddg"
   maxConnNum: 10
   maxIdleConns: 5
   MaxLifetime:  30

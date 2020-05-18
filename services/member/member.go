@@ -2,12 +2,12 @@ package member
 
 import (
 	"context"
-	"j7go/proto/member"
-	"time"
 	"j7go/components"
-	memberModel "j7go/models/member"
-	"j7go/models/region"
+	memberModel "j7go/models/tests/member"
+	"j7go/models/tests/region"
+	"j7go/proto/member"
 	"j7go/utils"
+	"time"
 )
 
 //新增会员 返回会员id

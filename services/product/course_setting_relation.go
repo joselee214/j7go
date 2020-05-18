@@ -2,8 +2,8 @@ package product
 
 import (
 	"context"
+	"j7go/models/tests/product"
 	"j7go/utils"
-	"j7go/models/product"
 	"math"
 	"math/big"
 )

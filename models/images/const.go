@@ -1,9 +1,0 @@
-package imagesModel
-
-const (
-	IMAGE_TYPE_GENERAL = 1
-	IMAGE_TYPE_COVER = 2
-	IMAGE_TYPE_LOGO = 3
-	IMAGE_TYPE_AVATAR = 4
-	IMAGE_TYPE_FACE = 5
-)

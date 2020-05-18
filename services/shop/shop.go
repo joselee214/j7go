@@ -3,14 +3,14 @@ package shopService
 import (
 	"context"
 	"github.com/joselee214/j7f/components/errors"
-	"j7go/errors"
-	"j7go/proto/shop"
-	"time"
 	"j7go/components"
-	"j7go/models/region"
-	"j7go/models/shop"
+	"j7go/errors"
+	"j7go/models/tests/region"
+	"j7go/models/tests/shop"
+	"j7go/proto/shop"
 	"j7go/services/images"
 	"j7go/utils"
+	"time"
 )
 
 //调用model获取门店信息

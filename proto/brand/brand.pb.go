@@ -463,7 +463,7 @@ func _BrandServer_GetShopList_Handler(srv interface{}, stream grpc.ServerStream)
 	return srv.(BrandServerServer).GetShopList(&brandServerGetShopListServer{stream})
 }
 
-type BrandServer_GetShopListServer interface {
+type  BrandServer_GetShopListServer interface {
 	Send(*GetShopListResponse) error
 	Recv() (*GetShopListRequest, error)
 	grpc.ServerStream

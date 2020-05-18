@@ -2,8 +2,8 @@ package brandService
 
 import (
 	"context"
+	"j7go/models/tests/shop"
 	"j7go/proto/brand"
-	"j7go/models/shop"
 )
 
 func GetShopList(ctx context.Context, brandId uint) (*brand.GetShopListResponse, error) {

@@ -49,10 +49,15 @@
 
 
 
+### XO
+xo mysql://root:awerli123@127.0.0.1/aypcddg -o models --template-path /Users/joselee/codes/j7go/templates
 
-xo mysql://root:awerli123@127.0.0.1/ypcfx -o models --template-path /Users/joselee/codes/j7go/templates
+### protobuf
+protoc --go_out=plugins=grpc:./proto/ddgadmin ./protobuf/ddgadmin.proto
+然后自行处理 common 信息 GetHeader / GetStatus 等方法 
+
 
 RUNTIME_ENV=dev go run main.go
 
-
-GRPC 调试  grpcui -plaintext 127.0.0.1:65332
+### GRPC 调试  
+grpcui -plaintext 127.0.0.1:54613

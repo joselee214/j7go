@@ -2,8 +2,8 @@ package product
 
 import (
 	"context"
+	"j7go/models/tests/product"
 	"time"
-	"j7go/models/product"
 )
 
 //商品操作日志表

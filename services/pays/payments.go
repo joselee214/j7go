@@ -3,13 +3,13 @@ package pays
 import (
 	"context"
 	"github.com/joselee214/j7f/components/errors"
-	"j7go/errors"
 	"github.com/joselee214/j7f/proto/common"
-	ps "j7go/proto/payments"
 	"go.uber.org/zap"
-	"time"
-	"j7go/models/payment"
+	"j7go/errors"
+	"j7go/models/tests/payment"
+	ps "j7go/proto/payments"
 	"j7go/utils"
+	"time"
 )
 
 //获取支付列表

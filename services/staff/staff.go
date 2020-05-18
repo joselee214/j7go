@@ -3,16 +3,16 @@ package staff
 import (
 	"context"
 	"github.com/joselee214/j7f/components/errors"
-	"j7go/errors"
-	"j7go/proto/staff"
 	"go.uber.org/zap"
-	"time"
 	"j7go/components"
-	countryModel "j7go/models/country"
-	imageModel "j7go/models/images"
-	"j7go/models/shop"
-	staffModel "j7go/models/staff"
+	"j7go/errors"
+	countryModel "j7go/models/tests/country"
+	imageModel "j7go/models/tests/images"
+	"j7go/models/tests/shop"
+	staffModel "j7go/models/tests/staff"
+	"j7go/proto/staff"
 	"j7go/utils"
+	"time"
 )
 
 //新增员工返回id

@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/joselee214/j7f/components/http/server"
-	"j7go/components"
-	"j7go/models"
+	"j7go/models/ddg"
 	"net/http"
 )
 
@@ -22,8 +21,8 @@ type TgetController struct {
 func (ctrl *TgetController) test(ctx *gin.Context)  {
 	//param,_ := ctx.GetQuery("zzz")
 	//fmt.Println("=======>",param)
-	dbConn, _ := components.M.GetSlaveConn()
-	data,err := models.InitdbByID(dbConn,1)
+	//dbConn, _ := components.M.GetSlaveConn()       //"j7go/components"
+	data,err := ddg.DdgAdminUserByID(ctx,1)
 	if err != nil {
 		fmt.Println("======x=>",err)
 	}

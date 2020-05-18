@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 	"github.com/r3labs/diff"
-	"j7go/proto/product"
 	"go.uber.org/zap"
-	"time"
-	"j7go/models/images"
-	productModel "j7go/models/product"
+	"j7go/models/tests/images"
+	productModel "j7go/models/tests/product"
+	"j7go/proto/product"
 	"j7go/utils"
+	"time"
 )
 
 //添加图片

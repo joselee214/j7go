@@ -2,14 +2,14 @@ package product
 
 import (
 	"context"
+	"go.uber.org/zap"
+	"j7go/components"
+	"j7go/models/tests/product"
 	"j7go/proto/images"
 	product2 "j7go/proto/product"
-	"go.uber.org/zap"
-	"time"
-	"j7go/components"
-	"j7go/models/product"
 	imagesService "j7go/services/images"
 	"j7go/utils"
+	"time"
 )
 
 func AddPackageCourse(ctx context.Context, img *images.CommonAlbumImageRequest, c *product.PackageCourseTemplate, t []uint, p []*product2.PackageCoursePersonalSetting) (uint, error) {

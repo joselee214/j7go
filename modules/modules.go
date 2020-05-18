@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"j7go/components"
-	"j7go/modules/brand"
+	"j7go/modules/ddgadmin"
 	"j7go/modules/tget"
 	"os"
 )
@@ -22,7 +22,7 @@ func RegisterModules(e *components.Engine) {
 		//member.Init(s)
 
 		gs := s.GetEngine()
-		brand.Init(gs)
+		//brand.Init(gs)
 		//fmt.Println( "s.GetServicesInfo()" )
 		//fmt.Println( s.GetServicesInfo() )
 
@@ -56,9 +56,9 @@ func explainModules(sconfigs map[string]interface{},s interface{})  {
 			if enableModules,ok := v.([]string); ok {
 				for _,m := range enableModules {
 					switch m {
-						case "brand":
+						case "ddgadmin":
 							println("GrpcServer enableModules : " + m)
-							brand.Init(gs)
+							ddgadmin.Init(gs)
 						case "tget":
 							println("HttpServer enableModules : " + m)
 							tget.Init(gr)

@@ -2,10 +2,10 @@ package shopService
 
 import (
 	"context"
+	"j7go/models/tests/shop"
 	"j7go/proto/shop"
-	"time"
-	"j7go/models/shop"
 	"j7go/utils"
+	"time"
 )
 
 func SaveShopArea(ctx context.Context, s *shop.ShopAreaRequest) (id uint, err error) {
