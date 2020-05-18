@@ -6,9 +6,11 @@ log:
     levelKey: "level"
     nameKey: "greeterSrv"
   outputPaths:
-    - /logs/j7go/demo.log
+#    - /logs/j7go/demo.log
+    - stdout
   ErrorOutputPaths:
-    - /logs/j7go/error.log
+#    - /logs/j7go/error.log
+    - stderr
 
 server:
   - ip: "0.0.0.0"

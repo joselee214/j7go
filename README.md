@@ -50,10 +50,12 @@
 
 
 ### XO
-xo mysql://root:awerli123@127.0.0.1/aypcddg -o models --template-path /Users/joselee/codes/j7go/templates
+xo mysql://root:awerli123@127.0.0.1/aypcddg -o generate_files/xo --template-path /Users/joselee/codes/j7go/templates
+然后自行选择需要的
 
 ### protobuf
-protoc --go_out=plugins=grpc:./proto/ddgadmin ./protobuf/ddgadmin.proto
+protoc --go_out=plugins=grpc:./generate_files/proto ./protobuf/ddgadmin.proto
+import  j7f/proto/common
 然后自行处理 common 信息 GetHeader / GetStatus 等方法 
 
 
