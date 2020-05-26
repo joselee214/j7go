@@ -32,11 +32,15 @@ var rootCmd = &cobra.Command{
 		modules.RegisterMqHandel()
 
 		waiter := sync.WaitGroup{}
-		waiter.Add(1)
-
-		go components.E.Run()	//启动服务//注册etcd
-
+		for range components.E.Server {
+			waiter.Add(1)
+		}
+		go components.E.Run(&waiter)	//启动服务//注册etcd
+		//fmt.Println("==================cmd f1")
 		waiter.Wait()
+		//fmt.Println("==================cmd f")
+		//fmt.Println(os.Getpid())
+
 		return nil
 	},
 }

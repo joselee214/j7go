@@ -6,6 +6,8 @@ import (
 	"github.com/joselee214/j7f/components/lock"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"os"
+	"sync"
 )
 
 var E *Engine
@@ -59,7 +61,7 @@ func NewEngine(cfgPath string, grpcOpts ...grpc.ServerOption) (*Engine, error) {
 		return nil, err
 	}
 
-	e.Register = NewRegister()
+	e.Register = NewRegister(e)
 
 
 	err = NewGrpcClient(e.Opts.GrpcClientConfig)
@@ -70,15 +72,15 @@ func NewEngine(cfgPath string, grpcOpts ...grpc.ServerOption) (*Engine, error) {
 	return e, nil
 }
 
-func (e *Engine) StartServ() error {
-	for _, gsrv := range e.GraceSrv {
-		err := gsrv.ListenAndServe()
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
+//func (e *Engine) StartServ() error {
+//	for _, gsrv := range e.GraceSrv {
+//		err := gsrv.ListenAndServe()
+//		if err != nil {
+//			return err
+//		}
+//	}
+//	return nil
+//}
 
 func (e *Engine) RegisterModules(f ...interface{}) {
 	for _, srv := range e.Server {
@@ -98,9 +100,13 @@ func (e *Engine) RegisterModules(f ...interface{}) {
 //	}
 //}
 
-func (e *Engine) Run() {
+func (e *Engine) Run(wg *sync.WaitGroup) {
 	for index, server := range e.Server {
 		go func(index int, server Server) {
+
+			//fmt.Println("==================RUN")
+			//fmt.Println(os.Getpid())
+
 			err := server.NewServ()
 			if err != nil {
 				panic(fmt.Errorf("new %s server err %s", e.Opts.ServerConfig[index].Protocol, err))
@@ -112,6 +118,7 @@ func (e *Engine) Run() {
 			}
 
 			L.Info(e.Opts.ServerConfig[index].Protocol+" SERVICE START",
+				zap.Int("local_pid", os.Getpid()),
 				zap.String("addr", e.Opts.ServerConfig[index].Ip),
 				zap.Int("port", e.Opts.ServerConfig[index].Port),
 				zap.String("service_key", e.Opts.ServiceConfig.Key+"_"+e.Opts.ServerConfig[index].Protocol),
@@ -120,10 +127,33 @@ func (e *Engine) Run() {
 
 			//fmt.Println("SERVICE START", e.Opts.ServerConfig[index].Ip,e.Opts.ServerConfig[index].Port )
 
+			//defer func() {
+			//	if r:= recover();r!=nil{
+			//		fmt.Println( r )
+			//	}
+			//}()
 			err = e.GraceSrv[index].ListenAndServe()
-			if err != nil {
-				panic(fmt.Errorf("start service err %s", err))
-			}
+
+			wg.Done()
+
+			//fmt.Println("==================STOP")
+			//fmt.Println(err)
+			//fmt.Println(wg)
+			//fmt.Println("==================STOP")
+
+
+			L.Info(e.Opts.ServerConfig[index].Protocol+" SERVICE STOP",
+				zap.Int("local_pid", os.Getpid()),
+				zap.String("addr", e.Opts.ServerConfig[index].Ip),
+				zap.Int("port", e.Opts.ServerConfig[index].Port),
+				zap.String("service_key", e.Opts.ServiceConfig.Key+"_"+e.Opts.ServerConfig[index].Protocol),
+				zap.String("service_node_id", e.Opts.ServerConfig[index].NodeId),
+				zap.String("service_node_version", e.Opts.ServerConfig[index].Version))
+
+			//if err != nil {
+			//	fmt.Println("start service / end service err %s", err)
+			//	//panic(fmt.Errorf("start service / end service err %s", err))
+			//}
 		}(index, server)
 	}
 }

@@ -58,6 +58,8 @@ protoc --go_out=plugins=grpc:./generate_files/proto ./protobuf/ddgadmin.proto
 import  j7f/proto/common
 然后自行处理 common 信息 GetHeader / GetStatus 等方法 
 
+protoc --php_out=./class/grpc --proto_path=/Users/joselee/codes/j7go/protobuf /Users/joselee/codes/j7go/protobuf/ddgadmin.proto
+
 
 RUNTIME_ENV=dev go run main.go
 

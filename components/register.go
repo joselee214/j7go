@@ -16,10 +16,15 @@ type ServiceConfig struct {
 
 type Register struct {
 	R *service_register.RegisterOpts
+	E *service_register.EtcdCli
 }
 
-func NewRegister() *Register {
-	return &Register{}
+func NewRegister(e *Engine) *Register {
+	r := &Register{}
+	if e.Opts.EtcdConfig != nil {
+		r.E , _ = service_register.NewEtcd(e.Opts.EtcdConfig)
+	}
+	return r
 }
 
 func (r *Register) Register(e *Engine, index int) error {
@@ -62,12 +67,8 @@ func (r *Register) Register(e *Engine, index int) error {
 		TTL:   ttlOption,
 	}
 
-	etcdCli, err := service_register.NewEtcd(e.Opts.EtcdConfig)
-	if err != nil {
-		return err
-	}
+	e.GraceSrv[index].Rr = *service_register.NewRegisterOpts(data, r.E)
 
-	rr := *service_register.NewRegisterOpts(data, etcdCli)
-	return rr.Register()
+	return e.GraceSrv[index].Rr.Register()
 }
 
