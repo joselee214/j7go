@@ -59,7 +59,7 @@ func (r *Register) Register(e *Engine, index int) error {
 	ttlOption := service_register.NewTTLOption(time.Duration(e.Opts.ServiceConfig.Heartbeat)*time.Second,
 		time.Duration(e.Opts.ServiceConfig.Ttl)*time.Second)
 
-	key := e.Opts.ServiceConfig.Key + "_" + e.Opts.ServerConfig[index].Protocol + "/" + e.Opts.ServerConfig[index].NodeId
+	key := e.Opts.ServiceConfig.Key + "_" + e.Opts.ServerConfig[index].Protocol + "/" + e.Opts.ServerConfig[index].Version + "/" + e.Opts.ServerConfig[index].NodeId
 
 	data := &service_register.Service{
 		Key:   key,
