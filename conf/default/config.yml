@@ -12,6 +12,14 @@ log:
 #    - /logs/j7go/error.log
     - stderr
 
+#server:
+#  - protocol: "application"  #grpc
+#    #nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
+#    version: "1.0.0"
+#    enableModules:
+#      - brand
+#      - ddgadmin
+
 server:
   - ip: "0.0.0.0"
     port: 7001
@@ -33,13 +41,13 @@ server:
     version: "2.1.11"
     enableModules:
       - tget
-#  - ip: "0.0.0.0"
-#    port: 7003
-#    protocol: "http"  #grpc
-#  #nodeId: "1"
-#    version: "1.0"
-#    enableModules:
-#      - tget
+  - ip: "0.0.0.0"
+    port: 7003
+    protocol: "http"  #grpc
+  #nodeId: "1"
+    version: "1.0"
+    enableModules:
+      - tget
 
 
 grpc_stream:

@@ -23,22 +23,18 @@ var rootCmd = &cobra.Command{
 		if err != nil {
 			panic(fmt.Errorf("new engine err %s", err))
 		}
+
 		components.L.Info("Using config file:", zap.String(`path`, components.E.Opts.Config.ConfigFileUsed()))
 
-		//注册路由
+		//注册 模块 路由
 		modules.RegisterModules(components.E) //register server
-
-		//Mq handel
-		modules.RegisterMqHandel()
 
 		waiter := sync.WaitGroup{}
 		for range components.E.Server {
 			waiter.Add(1)
 		}
 		go components.E.Run(&waiter)	//启动服务//注册etcd
-		//fmt.Println("==================cmd f1")
 		waiter.Wait()
-		//fmt.Println("==================cmd f")
 		//fmt.Println(os.Getpid())
 
 		return nil

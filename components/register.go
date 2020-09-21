@@ -28,7 +28,6 @@ func NewRegister(e *Engine) *Register {
 }
 
 func (r *Register) Register(e *Engine, index int) error {
-
 	if e.Opts.EtcdConfig == nil {
 		return nil
 	}

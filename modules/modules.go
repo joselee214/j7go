@@ -68,8 +68,3 @@ func explainModules(sconfigs map[string]interface{},s interface{})  {
 		}
 	}
 }
-
-
-
-func RegisterMqHandel() {
-}

@@ -36,9 +36,11 @@ func NewEngine(cfgPath string, grpcOpts ...grpc.ServerOption) (*Engine, error) {
 		return nil, err
 	}
 
-	err = InitDB(e.Opts.DBConfig)
-	if err != nil {
-		return nil, err
+	if e.Opts.DBConfig !=nil {
+		err = InitDB(e.Opts.DBConfig)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	//err = InitNsq(e.Opts.NsqConfig)
@@ -51,20 +53,23 @@ func NewEngine(cfgPath string, grpcOpts ...grpc.ServerOption) (*Engine, error) {
 	//	return nil, err
 	//}
 
-	err = NewRedis(e.Opts.RedisConfig)
-	if err != nil {
-		return nil, err
-	}
-
-	err = NewServer(e, grpcOpts...)
-	if err != nil {
-		return nil, err
+	if e.Opts.RedisConfig != nil {
+		err = NewRedis(e.Opts.RedisConfig)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	e.Register = NewRegister(e)
 
+	if e.Opts.GrpcClientConfig != nil {
+		err = NewGrpcClient(e.Opts.GrpcClientConfig)
+		if err != nil {
+			return nil, err
+		}
+	}
 
-	err = NewGrpcClient(e.Opts.GrpcClientConfig)
+	err = NewServer(e, grpcOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -112,18 +117,24 @@ func (e *Engine) Run(wg *sync.WaitGroup) {
 				panic(fmt.Errorf("new %s server err %s", e.Opts.ServerConfig[index].Protocol, err))
 			}
 
-			err = e.Register.Register(e, index)
-			if err != nil {
-				panic(fmt.Errorf("register service err %s", err))
-			}
+			fmt.Println("==================e.Opts.ServerConfig")
+			fmt.Println(e.Opts.ServerConfig)
 
-			L.Info(e.Opts.ServerConfig[index].Protocol+" SERVICE START",
-				zap.Int("local_pid", os.Getpid()),
-				zap.String("addr", e.Opts.ServerConfig[index].Ip),
-				zap.Int("port", e.Opts.ServerConfig[index].Port),
-				zap.String("service_key", e.Opts.ServiceConfig.Key+"_"+e.Opts.ServerConfig[index].Protocol),
-				zap.String("service_node_id", e.Opts.ServerConfig[index].NodeId),
-				zap.String("service_node_version", e.Opts.ServerConfig[index].Version))
+			if e.Opts.ServiceConfig != nil {
+
+				err = e.Register.Register(e, index)
+				if err != nil {
+					panic(fmt.Errorf("register service err %s", err))
+				}
+
+				L.Info(e.Opts.ServerConfig[index].Protocol+" SERVICE START",
+					zap.Int("local_pid", os.Getpid()),
+					zap.String("addr", e.Opts.ServerConfig[index].Ip),
+					zap.Int("port", e.Opts.ServerConfig[index].Port),
+					zap.String("service_key", e.Opts.ServiceConfig.Key+"_"+e.Opts.ServerConfig[index].Protocol),
+					zap.String("service_node_id", e.Opts.ServerConfig[index].NodeId),
+					zap.String("service_node_version", e.Opts.ServerConfig[index].Version))
+			}
 
 			//fmt.Println("SERVICE START", e.Opts.ServerConfig[index].Ip,e.Opts.ServerConfig[index].Port )
 

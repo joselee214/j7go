@@ -46,6 +46,13 @@ func NewServer(e *Engine, grpcOpts ...grpc.ServerOption) error {
 
 		protocol := strings.ToUpper(serverConfig.Protocol)
 		switch protocol {
+		//case "APPLICATION":
+		//	server, err = NewApplication(serverConfig)
+		//	if err != nil {
+		//		return fmt.Errorf("new application err: %s", err)
+		//	}
+		//	RegisterAppModules(server)
+		//	e.Server = append(e.Server, server)
 		case "HTTP":
 			server, err = NewHttpServ(serverConfig)
 			if err != nil {
