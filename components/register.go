@@ -36,8 +36,9 @@ func (r *Register) Register(e *Engine, index int) error {
 
 	node := service_register.NewNode(e.Opts.ServerConfig[index].NodeId,
 		e.Opts.ServerConfig[index].Ip,
-		e.Opts.ServerConfig[index].Port,
 		strings.Join(util.GetLocalIps(),","),
+		e.Opts.ServerConfig[index].Version,
+		e.Opts.ServerConfig[index].Port,
 		map[string]string{} )  //"protocol": e.Opts.ServerConfig[index].Protocol,"ip": strings.Join(util.GetLocalIps(),",")
 
 	serviceInfo := e.Server[index].GetServicesInfo()
