@@ -37,7 +37,8 @@ func (r *Register) Register(e *Engine, index int) error {
 	node := service_register.NewNode(e.Opts.ServerConfig[index].NodeId,
 		e.Opts.ServerConfig[index].Ip,
 		e.Opts.ServerConfig[index].Port,
-		map[string]string{"protocol": e.Opts.ServerConfig[index].Protocol,"ips": strings.Join(util.GetLocalIps(),",")})
+		strings.Join(util.GetLocalIps(),","),
+		map[string]string{} )  //"protocol": e.Opts.ServerConfig[index].Protocol,"ip": strings.Join(util.GetLocalIps(),",")
 
 	serviceInfo := e.Server[index].GetServicesInfo()
 	for k, v := range serviceInfo {
@@ -55,7 +56,8 @@ func (r *Register) Register(e *Engine, index int) error {
 		return err
 	}
 
-	ttlOption := service_register.NewTTLOption(time.Duration(e.Opts.ServiceConfig.Heartbeat)*time.Second,
+	ttlOption := service_register.NewTTLOption(
+		time.Duration(e.Opts.ServiceConfig.Heartbeat)*time.Second,
 		time.Duration(e.Opts.ServiceConfig.Ttl)*time.Second)
 
 	key := e.Opts.ServiceConfig.Key + "_" + e.Opts.ServerConfig[index].Protocol + "/" + e.Opts.ServerConfig[index].Version + "/" + e.Opts.ServerConfig[index].NodeId

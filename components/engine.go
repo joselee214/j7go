@@ -16,7 +16,7 @@ type Engine struct {
 	Opts      *Options
 	Server    []Server
 	GraceSrv  []*grace.Server
-	Register  *Register
+	Register  []*Register
 	RedisLock *lock.RedisLock
 }
 
@@ -59,8 +59,6 @@ func NewEngine(cfgPath string, grpcOpts ...grpc.ServerOption) (*Engine, error) {
 			return nil, err
 		}
 	}
-
-	e.Register = NewRegister(e)
 
 	if e.Opts.GrpcClientConfig != nil {
 		err = NewGrpcClient(e.Opts.GrpcClientConfig)
@@ -117,12 +115,12 @@ func (e *Engine) Run(wg *sync.WaitGroup) {
 				panic(fmt.Errorf("new %s server err %s", e.Opts.ServerConfig[index].Protocol, err))
 			}
 
-			fmt.Println("==================e.Opts.ServerConfig")
-			fmt.Println(e.Opts.ServerConfig)
+			//fmt.Println("==================e.Opts.ServerConfig")
+			//fmt.Println(e.Opts.ServerConfig)
 
 			if e.Opts.ServiceConfig != nil {
 
-				err = e.Register.Register(e, index)
+				err = e.Register[index].Register(e, index)
 				if err != nil {
 					panic(fmt.Errorf("register service err %s", err))
 				}

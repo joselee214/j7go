@@ -2,14 +2,13 @@ package components
 
 import (
 	"fmt"
-	"github.com/google/uuid"
 	"github.com/joselee214/j7f/components/grace"
 	"github.com/joselee214/j7f/components/service_register"
+	"github.com/joselee214/j7f/util"
 	"google.golang.org/grpc"
 	"net"
 	"strconv"
 	"strings"
-	"time"
 )
 
 const RAND_PORT = 0
@@ -89,18 +88,19 @@ func NewServer(e *Engine, grpcOpts ...grpc.ServerOption) error {
 
 		if serverConfig.NodeId  == "" {
 			//e.Opts.ServerConfig[index].NodeId = strings.Replace(s, `\`, `\\\`, -1)
-			e.Opts.ServerConfig[index].NodeId = NewNid()
+			e.Opts.ServerConfig[index].NodeId =  strings.Join(util.GetLocalIps(),",") + ":" + strconv.Itoa(e.Opts.ServerConfig[index].Port)        //NewNid()
 		}
 
 		e.GraceSrv = append(e.GraceSrv, grace.NewServer(server)) //grace use to hot reload
+		e.Register = append(e.Register, NewRegister(e) )
 	}
 	return nil
 }
 
-func NewNid() string {
-	t := time.Now().String()
-	timeStr := t[2:26]
-	tStr := strings.Replace(strings.Replace(strings.Replace(strings.Replace(timeStr, `:`, ``, -1), `.`, ``, -1), ` `, ``, -1), `-`, ``, -1)
-	uuidbyte,_ := uuid.NewUUID()
-	return tStr+"-"+uuidbyte.String()
-}
+//func NewNid() string {
+//	t := time.Now().String()
+//	timeStr := t[2:26]
+//	tStr := strings.Replace(strings.Replace(strings.Replace(strings.Replace(timeStr, `:`, ``, -1), `.`, ``, -1), ` `, ``, -1), `-`, ``, -1)
+//	uuidbyte,_ := uuid.NewUUID()
+//	return tStr+"-"+uuidbyte.String()
+//}

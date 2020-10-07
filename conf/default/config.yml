@@ -24,7 +24,7 @@ server:
   - ip: "0.0.0.0"
     port: 7001
     protocol: "grpc"  #grpc
-    #nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
+#    nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
     version: "1.0.0"
     enableModules:
       - brand
@@ -44,7 +44,6 @@ server:
   - ip: "0.0.0.0"
     port: 7003
     protocol: "http"  #grpc
-  #nodeId: "1"
     version: "1.0"
     enableModules:
       - tget
@@ -57,14 +56,14 @@ grpc_stream:
 
 service:
   key: "/7YES_SERVICE/j7go"
-  ttl: 15 # 单位s
-  heartbeat: 14 # 单位s heartbeat的设置要比ttl略小, 防止过期
+  ttl: 10 # 单位s
+  heartbeat: 1 # 单位s heartbeat的设置要比ttl略小, 防止过期
 
 #注释掉即可不注册etcd##
 etcd:
   endpoints:
     - "127.0.0.1:2379"
-  autoSyncInterval: 3
+  autoSyncInterval: 0
   dialTimeout: 3
   dialKeepAliveTime: 3
   dialKeepAliveTimeout: 3
