@@ -37,13 +37,13 @@ type JsonStatisticsController struct {
 
 
 func (ctrl *JsonStatisticsController) noop(ctx *gin.Context)  {
-	ctx.String( http.StatusOK, "" )
+	ctrl.ResponseSuccess(ctx)
 }
 
 func (ctrl *JsonStatisticsController) stat(ctx *gin.Context)  {
 	numofchan := len(dataChan)
-	str := fmt.Sprintf("num fo chan : %d",numofchan)
-	ctx.String( http.StatusOK, str )
+	ctrl.Data = fmt.Sprintf("num fo chan : %d",numofchan)
+	ctrl.ResponseSuccess(ctx)
 }
 
 func (ctrl *JsonStatisticsController) c(ctx *gin.Context)  {
@@ -87,7 +87,8 @@ func (ctrl *JsonStatisticsController) c(ctx *gin.Context)  {
 	}
 
 
-	ctx.String(http.StatusOK,"ok")
+	ctrl.Data = "ok"
+	ctrl.ResponseSuccess(ctx)
 
 }
 
