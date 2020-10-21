@@ -61,7 +61,7 @@ import  j7f/proto/common
 protoc --php_out=./class/grpc --proto_path=/Users/joselee/codes/j7go/protobuf /Users/joselee/codes/j7go/protobuf/ddgadmin.proto
 
 
-RUNTIME_ENV=dev go run main.go
+RUNTIME_ENV=default go run main.go
 
 ### GRPC 调试  
 grpcui -plaintext 127.0.0.1:54613

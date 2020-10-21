@@ -62,6 +62,9 @@ func explainModules(sconfigs map[string]interface{},s interface{})  {
 						case "tget":
 							println("HttpServer enableModules : " + m)
 							tget.Init(gr)
+						case "json_statistics":
+							println("HttpServer enableModules : " + m)
+							json_statistics.Init(gr)
 					}
 				}
 			}
