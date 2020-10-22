@@ -60,6 +60,11 @@ func NewEngine(cfgPath string, grpcOpts ...grpc.ServerOption) (*Engine, error) {
 		}
 	}
 
+
+	if e.Opts.MongoConfig != nil {
+		NewMongoPool(e.Opts.MongoConfig)
+	}
+
 	if e.Opts.GrpcClientConfig != nil {
 		err = NewGrpcClient(e.Opts.GrpcClientConfig)
 		if err != nil {

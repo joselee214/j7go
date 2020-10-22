@@ -23,6 +23,7 @@ type Options struct {
 	GrpcStreamConfig *server.Config           `mapstructure:"grpc_stream"`
 	NsqConfig        *NsqConfig               `mapstructure:"nsq"`
 	MQConfig         *MQConfig                `mapstructure:"mq"`
+	MongoConfig         *MongoConfig          `mapstructure:"mongodb"`
 }
 
 var C *config.Configer

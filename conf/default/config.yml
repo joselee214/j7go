@@ -21,34 +21,34 @@ log:
 #      - ddgadmin
 
 server:
-  - ip: "0.0.0.0"
-    port: 0
-    protocol: "grpc"  #grpc
-#    nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
-    version: "1.0.0"
-    enableModules:
-      - ddgadmin
 #  - ip: "0.0.0.0"
-#    port: 8082
+#    port: 0
+#    protocol: "grpc"  #grpc
+##    nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
+#    version: "1.0.0"
+#    enableModules:
+#      - ddgadmin
+##  - ip: "0.0.0.0"
+##    port: 8082
+##    protocol: "http"  #grpc
+##    #nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
+##    version: "1.0"
+#  - ip: "0.0.0.0"
+#    port: 0
 #    protocol: "http"  #grpc
-#    #nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
-#    version: "1.0"
-  - ip: "0.0.0.0"
-    port: 0
-    protocol: "http"  #grpc
-    #nodeId: "1"
-    version: "2.1.11"
-    enableModules:
-      - tget
-  - ip: "0.0.0.0"
-    port: 0
-    protocol: "http"  #grpc
-    version: "1.1.1"
-    enableModules:
-      - tget
+#    #nodeId: "1"
+#    version: "2.1.11"
+#    enableModules:
+#      - tget
+#  - ip: "0.0.0.0"
+#    port: 0
+#    protocol: "http"  #grpc
+#    version: "1.1.1"
+#    enableModules:
+#      - tget
 
   - ip: "0.0.0.0"
-    port: 0
+    port: 7004
     protocol: "http"  #grpc
     version: "1.0.0"
     enableModules:
@@ -87,8 +87,9 @@ redis:
   MaxConnLifetime: 600
 
 mongodb:
-  uri:  "mongodb://127.0.0.1:27017"
-  MaxConn: 10
+  addr:  "mongodb://127.0.0.1:27017"
+  MaxIdle: 1
+  MaxActive: 10
 
 
 db:
