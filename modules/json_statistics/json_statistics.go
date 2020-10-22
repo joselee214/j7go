@@ -11,7 +11,6 @@ import (
 	"github.com/joselee214/j7f/components/http/server"
 	"io/ioutil"
 	"compress/gzip"
-	"net/http"
 	"time"
 )
 
@@ -84,12 +83,13 @@ func (ctrl *JsonStatisticsController) c(ctx *gin.Context)  {
 		case <- time.After(5*time.Microsecond):
 			//to sth
 		}
+
+		ctrl.Data = "ok"
+		ctrl.ResponseSuccess(ctx)
+	} else {
+		ctrl.Data = "fail"
+		ctrl.ResponseError(ctx, "fail")
 	}
-
-
-	ctrl.Data = "ok"
-	ctrl.ResponseSuccess(ctx)
-
 }
 
 

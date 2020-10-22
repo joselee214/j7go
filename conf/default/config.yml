@@ -27,7 +27,6 @@ server:
 #    nodeId: "2"  #设置，会顶替以前的，不设置，则同步存在形成分布式
     version: "1.0.0"
     enableModules:
-      - brand
       - ddgadmin
 #  - ip: "0.0.0.0"
 #    port: 8082
@@ -88,6 +87,8 @@ redis:
   MaxConnLifetime: 600
 
 mongodb:
+  uri:  "mongodb://127.0.0.1:27017"
+  MaxConn: 10
 
 
 db:

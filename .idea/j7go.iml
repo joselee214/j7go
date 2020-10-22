@@ -2,7 +2,15 @@
 <module type="WEB_MODULE" version="4">
   <component name="Go" enabled="true" />
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/services/brand" />
+      <excludeFolder url="file://$MODULE_DIR$/services/images" />
+      <excludeFolder url="file://$MODULE_DIR$/services/member" />
+      <excludeFolder url="file://$MODULE_DIR$/services/pays" />
+      <excludeFolder url="file://$MODULE_DIR$/services/product" />
+      <excludeFolder url="file://$MODULE_DIR$/services/shop" />
+      <excludeFolder url="file://$MODULE_DIR$/services/staff" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Bundled Protobuf Distribution" level="application" />
