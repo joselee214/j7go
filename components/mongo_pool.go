@@ -5,6 +5,7 @@ import (
 	"errors"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"go.uber.org/zap"
 	"sync"
 	"time"
@@ -16,11 +17,12 @@ type MongoConfig struct {
 	Addr string
 	MaxIdle int
 	MaxActive int
+	TimeOut int
 }
 
 const(
-	AVAILABLE = false
-	USED = true
+	AVAILABLE = 1
+	USING = 2
 )
 
 var mu sync.RWMutex
@@ -33,7 +35,7 @@ size: the size of allocated client pool <= MAX_CONNECTION
 type MongoClient struct{
 	Client *mongo.Client
 	pos int
-	flag bool
+	flag int
 }
 
 //释放到链接池
@@ -55,11 +57,52 @@ func NewMongoPool(cfg *MongoConfig) {
 	mongoconfigset = cfg
 	MongoPool.clientList = make([]MongoClient,mongoconfigset.MaxActive)
 	for size := 0;  size < mongoconfigset.MaxIdle && size < mongoconfigset.MaxActive ; size++ {
-
 		err := MongoPool.allocateCToPool(size)
-
 		if err != nil {
 			L.Info("init - initial create the connect pool failed, size: ", zap.Int("size",size) , zap.Error(err) )
+		}
+	}
+	go scanPoolList()
+}
+
+func scanPoolList()  {
+	for {
+		time.Sleep( 5 * time.Second )
+		mu.RLock()
+		avcount := 0
+		usingcount := 0
+		for i:=0; i<MongoPool.size; i++ {
+			if MongoPool.clientList[i].flag == AVAILABLE{
+				avcount = avcount + 1
+			}
+			if MongoPool.clientList[i].flag == USING{
+				usingcount = usingcount + 1
+			}
+		}
+		mu.RUnlock()
+		leftcc := avcount + usingcount - mongoconfigset.MaxIdle
+		if leftcc > 0 {
+			mu.Lock()
+			for i:=0; i<MongoPool.size; i++ {
+				if leftcc > 0 {
+					if MongoPool.clientList[i].flag == AVAILABLE {
+						MongoPool.clientList[i].Client.Disconnect(context.Background())
+						MongoPool.clientList[i] = MongoClient{}
+						leftcc = leftcc - 1
+					}
+				}
+			}
+			mu.Unlock()
+		}
+	}
+}
+
+func ResetMongoConfig(cfg *MongoConfig){
+	if cfg != nil {
+		if len(MongoPool.clientList) == 0 {
+			NewMongoPool(cfg)
+		} else {
+			mongoconfigset = cfg
 		}
 	}
 }
@@ -73,7 +116,8 @@ func MongoDbConnectSingleton() (client *mongo.Client, err error){
 
 		return nil, err
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+	//ctx, cancel := context.WithTimeout(context.Background(), time.Duration(mongoconfigset.TimeOut) )
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second )
 	defer cancel()
 	err = client.Connect(ctx)
 	if err != nil {
@@ -81,14 +125,38 @@ func MongoDbConnectSingleton() (client *mongo.Client, err error){
 		L.Info("Dbconnect - connect mongodb ctx failed: ", zap.Error(err) )
 		return nil, err
 	}
+	//if err = pingError(client); err !=nil {
+	//	return nil,err
+	//}
 	return client,nil
 }
 
+func pingError(client *MongoClient) error {
+	if err := client.Client.Ping(context.Background(),readpref.Primary()); err !=nil {
+		MongoPool.allocateCToPool(client.pos)
+		return err
+	}
+	return  nil
+}
+
 //从链接池获取一个链接...
-func MongoGetClient() (mongoclient *MongoClient,  err error) {
+func MongoGetClient() (*MongoClient,error) {
+	mgcli,err := getClient()
+	if err == nil {
+		err = pingError(mgcli)
+		if err!=nil {
+			return nil,err
+		}
+	}
+	MongoPool.clientList[mgcli.pos].flag = USING
+	return  mgcli,err
+}
+
+func getClient() (mongoclient *MongoClient,  err error) {
 	mu.RLock()
-	for i:=1; i<MongoPool.size; i++ {
+	for i:=0; i<MongoPool.size; i++ {
 		if MongoPool.clientList[i].flag == AVAILABLE{
+			mu.RUnlock()
 			return &MongoPool.clientList[i], nil
 		}
 	}
@@ -134,15 +202,11 @@ func (cp *MongoClientPool) allocateCToPool(pos int) (err error){
 		return err
 	}
 
-	MongoPool.clientList[pos].flag = USED
+	MongoPool.clientList[pos].flag = AVAILABLE
 	MongoPool.clientList[pos].pos = pos
 	return nil
 }
 
-//apply a connection from the pool
-func (cp *MongoClientPool) getCToPool(pos int){
-	MongoPool.clientList[pos].flag = USED
-}
 
 //free a connection back to the pool
 func (cp *MongoClientPool) putCBackPool(pos int){

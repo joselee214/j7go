@@ -68,6 +68,9 @@ func (o *Options) hotReset(e fsnotify.Event) {
 		}
 
 		err = ResetLog(o.LogConfig)
+		
+		ResetMongoConfig(o.MongoConfig)
+
 		if err != nil {
 			L.Panic("faild init log config", zap.Error(err))
 		}

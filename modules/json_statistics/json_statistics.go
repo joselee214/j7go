@@ -60,12 +60,10 @@ func (ctrl *JsonStatisticsController) c(ctx *gin.Context)  {
 	//}()
 
 	datas := ctx.PostForm("data")
-
-	xxx ,eee := ctx.GetRawData()
 	isgz := ctx.PostForm("gzip")
-	fmt.Println("indataindataindata", xxx , eee)
-	fmt.Println("indataindataindata",datas)
-	fmt.Println("indataindataindata",isgz)
+	//fmt.Println("indataindataindata", xxx , eee)
+	//fmt.Println("indataindataindata",datas)
+	//fmt.Println("indataindataindata",isgz)
 
 	var jsonbyte []byte
 	if isgz=="1" {
@@ -88,8 +86,8 @@ func (ctrl *JsonStatisticsController) c(ctx *gin.Context)  {
 	var indata []interface {}
 	err2 := json.Unmarshal(jsonbyte, &indata)
 
-	fmt.Println("indataindataindata",indata)
-	fmt.Println("indataindataindata",string(jsonbyte))
+	//fmt.Println("indataindataindata",indata)
+	//fmt.Println("indataindataindata",string(jsonbyte))
 
 	if err2==nil {
 		select {
@@ -110,28 +108,33 @@ func (ctrl *JsonStatisticsController) c(ctx *gin.Context)  {
 
 func (ctrl *JsonStatisticsController) writeMongo()  {
 
-	defer func() {
-		if r := recover(); r != nil {
-			fmt.Printf("exception recover：%s\n", r)
-		}
-	}()
+	//defer func() {
+	//	if r := recover(); r != nil {
+	//		fmt.Printf("exception recover：%s\n", r)
+	//	}
+	//}()
+
+	mgcligetlll,_ := components.MongoGetClient()
+	mgcligetlllxx,_ := components.MongoGetClient()
+
+	fmt.Println(mgcligetlll,mgcligetlllxx)
 
 	for {
 		select {
-		case data := <-dataChan:
+			case data := <-dataChan:
 
-			var err error
-			mgcli,mgc,err = getMongoClient()
-
-			if err==nil {
-				if _, err = mgc.InsertMany(context.TODO(), data); err != nil{
-					continue
+				var err error
+				for {
+					mgcli,mgc,err = getMongoClient()
+					if err==nil {
+						if _, err = mgc.InsertMany(context.TODO(), data); err == nil{
+							break
+						}
+					}
 				}
-			}
 
-		case <- time.After(3*time.Second):
-			releaseMongoClient()
-			break
+			case <- time.After(3*time.Second):
+				releaseMongoClient()
 		}
 	}
 	
@@ -142,6 +145,9 @@ var mgc *mongo.Collection
 var mgcli *components.MongoClient
 
 func getMongoClient() (*components.MongoClient,*mongo.Collection,error)  {
+	if mgcli != nil {
+		return  mgcli,mgc,nil
+	}
 	mgcliget,err := components.MongoGetClient()
 	if err==nil {
 		mgcli = mgcliget
@@ -154,8 +160,9 @@ func getMongoClient() (*components.MongoClient,*mongo.Collection,error)  {
 }
 
 func releaseMongoClient(){
-	fmt.Println("releaseMongoClient",mgcli)
+	//fmt.Println("releaseMongoClient",mgcli)
 	if mgcli != nil {
 		mgcli.Release()
+		mgcli = nil
 	}
 }

@@ -61,7 +61,14 @@ import  j7f/proto/common
 protoc --php_out=./class/grpc --proto_path=/Users/joselee/codes/j7go/protobuf /Users/joselee/codes/j7go/protobuf/ddgadmin.proto
 
 
+ab -n 1000 -c 100 -p ./conf/json_statistics.txt -T application/x-www-form-urlencoded "http://127.0.0.1:7004/c"
+
+
 RUNTIME_ENV=default go run main.go
 
 ### GRPC 调试  
 grpcui -plaintext 127.0.0.1:54613
+
+
+
+

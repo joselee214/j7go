@@ -87,9 +87,10 @@ redis:
   MaxConnLifetime: 600
 
 mongodb:
-  addr:  "mongodb://127.0.0.1:27017"
+  addr:  "mongodb://127.0.0.1:27017/?maxPoolSize=64"
   MaxIdle: 1
   MaxActive: 10
+  TimeOut: 3
 
 
 db:
