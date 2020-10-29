@@ -36,6 +36,7 @@ type MongoClient struct{
 	Client *mongo.Client
 	pos int
 	flag int
+	idlets int64
 }
 
 //释放到链接池
@@ -56,44 +57,30 @@ var MongoPool MongoClientPool
 func NewMongoPool(cfg *MongoConfig) {
 	mongoconfigset = cfg
 	MongoPool.clientList = make([]MongoClient,mongoconfigset.MaxActive)
-	for size := 0;  size < mongoconfigset.MaxIdle && size < mongoconfigset.MaxActive ; size++ {
-		err := MongoPool.allocateCToPool(size)
-		if err != nil {
-			L.Info("init - initial create the connect pool failed, size: ", zap.Int("size",size) , zap.Error(err) )
-		}
-	}
+	//for size := 0;  size < mongoconfigset.MaxActive ; size++ {
+	//	err := MongoPool.allocateCToPool(size)
+	//	if err != nil {
+	//		L.Info("init - initial create the connect pool failed, size: ", zap.Int("size",size) , zap.Error(err) )
+	//	}
+	//}
 	go scanPoolList()
 }
 
 func scanPoolList()  {
 	for {
 		time.Sleep( 5 * time.Second )
-		mu.RLock()
-		avcount := 0
-		usingcount := 0
+		mu.Lock()
+		//fmt.Println(" 1 MongoPool",MongoPool)
+		nowts := time.Now().UnixNano()
 		for i:=0; i<MongoPool.size; i++ {
 			if MongoPool.clientList[i].flag == AVAILABLE{
-				avcount = avcount + 1
-			}
-			if MongoPool.clientList[i].flag == USING{
-				usingcount = usingcount + 1
-			}
-		}
-		mu.RUnlock()
-		leftcc := avcount + usingcount - mongoconfigset.MaxIdle
-		if leftcc > 0 {
-			mu.Lock()
-			for i:=0; i<MongoPool.size; i++ {
-				if leftcc > 0 {
-					if MongoPool.clientList[i].flag == AVAILABLE {
-						MongoPool.clientList[i].Client.Disconnect(context.Background())
-						MongoPool.clientList[i] = MongoClient{}
-						leftcc = leftcc - 1
-					}
+				if ( nowts - MongoPool.clientList[i].idlets ) > (int64(mongoconfigset.MaxIdle) * int64(time.Second)) {
+					MongoPool.clientList[i].Client.Disconnect(context.Background())
+					MongoPool.clientList[i] = MongoClient{}
 				}
 			}
-			mu.Unlock()
 		}
+		mu.Unlock()
 	}
 }
 
@@ -204,6 +191,7 @@ func (cp *MongoClientPool) allocateCToPool(pos int) (err error){
 
 	MongoPool.clientList[pos].flag = AVAILABLE
 	MongoPool.clientList[pos].pos = pos
+	MongoPool.clientList[pos].idlets = time.Now().UnixNano()
 	return nil
 }
 
@@ -211,4 +199,6 @@ func (cp *MongoClientPool) allocateCToPool(pos int) (err error){
 //free a connection back to the pool
 func (cp *MongoClientPool) putCBackPool(pos int){
 	MongoPool.clientList[pos].flag = AVAILABLE
+	MongoPool.clientList[pos].idlets = time.Now().UnixNano()
+
 }

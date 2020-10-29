@@ -47,6 +47,8 @@ func (ctrl *JsonStatisticsController) noop(ctx *gin.Context)  {
 
 func (ctrl *JsonStatisticsController) stat(ctx *gin.Context)  {
 	numofchan := len(dataChan)
+	time.Sleep( 10*time.Second )
+	fmt.Println("components.E.Opts.DBConfig",components.E.Opts.DBConfig)
 	ctrl.Data = fmt.Sprintf("num fo chan : %d",numofchan)
 	ctrl.ResponseSuccess(ctx)
 }
@@ -114,10 +116,10 @@ func (ctrl *JsonStatisticsController) writeMongo()  {
 	//	}
 	//}()
 
-	mgcligetlll,_ := components.MongoGetClient()
-	mgcligetlllxx,_ := components.MongoGetClient()
+	//mgcligetlll,_ := components.MongoGetClient()
+	//mgcligetlllxx,_ := components.MongoGetClient()
 
-	fmt.Println(mgcligetlll,mgcligetlllxx)
+	//fmt.Println(mgcligetlll,mgcligetlllxx)
 
 	for {
 		select {

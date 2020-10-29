@@ -28,3 +28,5 @@ require (
 )
 
 replace github.com/joselee214/j7f => /Users/joselee/go/src/github.com/joselee214/j7f
+
+replace github.com/gogf/greuse => /Users/joselee/go/src/github.com/gogf/greuse

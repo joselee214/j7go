@@ -48,7 +48,7 @@ server:
 #      - tget
 
   - ip: "0.0.0.0"
-    port: 7004
+    port: 7003
     protocol: "http"  #grpc
     version: "1.0.0"
     enableModules:
@@ -88,14 +88,14 @@ redis:
 
 mongodb:
   addr:  "mongodb://127.0.0.1:27017/?maxPoolSize=64"
-  MaxIdle: 1
   MaxActive: 10
   TimeOut: 3
+  MaxIdle: 3
 
 
 db:
   name: "aypcddg"
-  maxConnNum: 10
+  maxConnNum: 6
   maxIdleConns: 5
   MaxLifetime:  30
   PingTickerTime: 9   #小于mysql的	interactive timeout
