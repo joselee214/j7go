@@ -48,7 +48,7 @@ server:
 #      - tget
 
   - ip: "0.0.0.0"
-    port: 7003
+    port: 0
     protocol: "http"  #grpc
     version: "1.0.0"
     enableModules:
@@ -95,7 +95,7 @@ mongodb:
 
 db:
   name: "aypcddg"
-  maxConnNum: 6
+  maxConnNum: 9
   maxIdleConns: 5
   MaxLifetime:  30
   PingTickerTime: 9   #小于mysql的	interactive timeout
